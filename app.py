@@ -1,4 +1,18 @@
 import streamlit as st
+
+import os
+
+for key in (
+    "SMTP_HOST",
+    "SMTP_PORT",
+    "SMTP_USER",
+    "SMTP_PASSWORD",
+    "SMTP_FROM",
+    "ALERT_EMAIL",
+):
+    if key in st.secrets:
+        os.environ[key] = str(st.secrets[key])
+
 from monitor import connect, setting, set_setting, feeds_for_topic, scan, send_digest, email_configured
 
 st.set_page_config(page_title='Publication Monitor', page_icon='📡', layout='wide')
